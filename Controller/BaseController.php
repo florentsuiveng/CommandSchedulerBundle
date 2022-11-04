@@ -2,6 +2,7 @@
 
 namespace JMose\CommandSchedulerBundle\Controller;
 
+use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Translation\TranslatorInterface as ComponentTranslatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface as ContractsTranslatorInterface;
@@ -19,16 +20,29 @@ abstract class BaseController extends AbstractController
     private $managerName;
 
     /**
+     * @var ManagerRegistry
+     */
+    private $managerRegistry;
+
+    /**
      * @var ContractsTranslatorInterface|ComponentTranslatorInterface
      */
     protected $translator;
 
     /**
-     * @param $managerName string
+     * @param string $managerName
      */
     public function setManagerName($managerName)
     {
         $this->managerName = $managerName;
+    }
+
+    /**
+     * @param ManagerRegistry $managerRegistry
+     */
+    public function setManagerRegister(ManagerRegistry $managerRegistry)
+    {
+        $this->managerRegistry = $managerRegistry;
     }
 
     /**
@@ -40,10 +54,10 @@ abstract class BaseController extends AbstractController
     }
 
     /**
-     * @return \Doctrine\Common\Persistence\ObjectManager
+     * @return \Doctrine\Persistence\ObjectManager
      */
     protected function getDoctrineManager()
     {
-        return $this->getDoctrine()->getManager($this->managerName);
+        return $this->managerRegistry->getManager($this->managerName);
     }
 }

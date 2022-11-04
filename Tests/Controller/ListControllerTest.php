@@ -2,6 +2,7 @@
 
 namespace JMose\CommandSchedulerBundle\Tests\Controller;
 
+use JMose\CommandSchedulerBundle\Entity\ScheduledCommand;
 use JMose\CommandSchedulerBundle\Fixtures\ORM\LoadScheduledCommandData;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Liip\TestFixturesBundle\Test\FixturesTrait;
@@ -141,8 +142,8 @@ class ListControllerTest extends WebTestCase
         // DataFixtures create 4 records
         $this->loadFixtures([LoadScheduledCommandData::class]);
 
-        $two = $this->em->getRepository('JMoseCommandSchedulerBundle:ScheduledCommand')->find(2);
-        $four = $this->em->getRepository('JMoseCommandSchedulerBundle:ScheduledCommand')->find(4);
+        $two = $this->em->getRepository(ScheduledCommand::class)->find(2);
+        $four = $this->em->getRepository(ScheduledCommand::class)->find(4);
         $two->setLocked(false);
         $four->setLastReturnCode(0);
         $this->em->flush();
