@@ -87,7 +87,7 @@ class DetailController extends BaseController
         $entityManager = $this->getDoctrineManager();
 
         // Init and populate form object
-        $commandDetail = $request->request->get('command_scheduler_detail');
+        $commandDetail = $request->request->all('command_scheduler_detail');
         if ('' != $commandDetail['id']) {
             $scheduledCommand = $entityManager->getRepository(ScheduledCommand::class)
                 ->find($commandDetail['id']);
@@ -106,8 +106,7 @@ class DetailController extends BaseController
             $entityManager->flush();
 
             // Add a flash message and do a redirect to the list
-            $this->get('session')->getFlashBag()
-                ->add('success', $this->translator->trans('flash.success', [], 'JMoseCommandScheduler'));
+            $this->addFlash('success', $this->translator->trans('flash.success', [], 'JMoseCommandScheduler'));
 
             return $this->redirect($this->generateUrl('jmose_command_scheduler_list'));
         }

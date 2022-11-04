@@ -54,8 +54,7 @@ class ListController extends BaseController
         $entityManager->flush();
 
         // Add a flash message and do a redirect to the list
-        $this->get('session')->getFlashBag()
-            ->add('success', $this->translator->trans('flash.deleted', [], 'JMoseCommandScheduler'));
+        $this->addFlash('success', $this->translator->trans('flash.deleted', [], 'JMoseCommandScheduler'));
 
         return $this->redirect($this->generateUrl('jmose_command_scheduler_list'));
     }
@@ -89,8 +88,7 @@ class ListController extends BaseController
         $entityManager->flush();
 
         // Add a flash message and do a redirect to the list
-        $this->get('session')->getFlashBag()
-            ->add('success', $this->translator->trans('flash.execute', [], 'JMoseCommandScheduler'));
+        $this->addFlash('success', $this->translator->trans('flash.execute', [], 'JMoseCommandScheduler'));
 
         if ($request->query->has('referer')) {
             return $this->redirect($request->getSchemeAndHttpHost().urldecode($request->query->get('referer')));
@@ -113,8 +111,7 @@ class ListController extends BaseController
         $entityManager->flush();
 
         // Add a flash message and do a redirect to the list
-        $this->get('session')->getFlashBag()
-            ->add('success', $this->translator->trans('flash.unlocked', [], 'JMoseCommandScheduler'));
+        $this->addFlash('success', $this->translator->trans('flash.unlocked', [], 'JMoseCommandScheduler'));
 
         if ($request->query->has('referer')) {
             return $this->redirect($request->getSchemeAndHttpHost().urldecode($request->query->get('referer')));
