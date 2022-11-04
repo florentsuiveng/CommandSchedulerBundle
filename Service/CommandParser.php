@@ -4,7 +4,8 @@ namespace JMose\CommandSchedulerBundle\Service;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\StreamOutput;
+use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
@@ -64,11 +65,12 @@ class CommandParser
             ]
         );
 
-        $output = new StreamOutput(fopen('php://memory', 'w+'));
+        Debug::enable();
+        $output = new BufferedOutput();
         $application->run($input, $output);
-        rewind($output->getStream());
+        $content = $output->fetch();
 
-        return $this->extractCommandsFromXML(stream_get_contents($output->getStream()));
+        return $this->extractCommandsFromXML($content);
     }
 
     /**
