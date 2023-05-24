@@ -89,7 +89,7 @@ class MonitorCommand extends Command
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|void|null
+     * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
