@@ -63,7 +63,7 @@ class ExecuteCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('scheduler:execute')
@@ -79,7 +79,7 @@ class ExecuteCommand extends Command
      * @param InputInterface  $input
      * @param OutputInterface $output
      */
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->dumpMode = $input->getOption('dump');
 

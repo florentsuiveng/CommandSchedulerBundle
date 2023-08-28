@@ -18,7 +18,7 @@ class StopSchedulerCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('scheduler:stop')
             ->setDescription('Stops command scheduler');

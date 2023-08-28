@@ -23,7 +23,7 @@ class StartSchedulerCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('scheduler:start')
             ->setDescription('Starts command scheduler')

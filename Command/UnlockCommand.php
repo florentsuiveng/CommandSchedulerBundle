@@ -60,7 +60,7 @@ class UnlockCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('scheduler:unlock')
@@ -81,7 +81,7 @@ class UnlockCommand extends Command
      * @param InputInterface  $input
      * @param OutputInterface $output
      */
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->unlockAll = $input->getOption('all');
         $this->scheduledCommandName = $input->getArgument('name');
